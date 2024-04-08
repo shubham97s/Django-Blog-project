@@ -1,0 +1,60 @@
+<html>
+  {% block body %}
+  {% block content %}
+    {% load static %}
+  <img src="{% static 'logo.jpg' %}" alt="Web" width="400" height ="200">
+
+  <img src="newyork.jpg"></img>
+  <img src="{% static 'newyork.jpg' %}" alt="Web" width="850" height ="250">
+
+  
+  <img src="softwareEng.jpg"><b>Software Engineering</b></img>
+  <img src="{% static 'softwareEng.jpg' %}" alt="Web" width="400" height ="150">
+ 
+
+    <h2 align="Center">StudyTutorials Portal</h2>
+    
+
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="interview.html">InterviewQuestions</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="color:white">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="DjangoRs.html">Django Rest Framework</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="Django.html"> Staring with Django Framework</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link disabled" href="https://www.youtube.com/@STech-" >Programmings channel</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <b><i><marquee > StechStudyTutorials.webhost </marquee></b>
+    <a href="https://lamp00project.000webhostapp.com/"><h3>Admin Personal Website</h3></a>
+<a href="contact.html">
+    <button>Contact Us</button>
+  </a> 
+  <a href="signup.html">
+    <button>Sign Up</button>
+  </a> 
+</div>
+{% endblock content %}
+{% endblock %}

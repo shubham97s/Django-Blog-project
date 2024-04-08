@@ -1,0 +1,35 @@
+
+
+
+h1 {
+    margin: 0 0 50px 0;
+  }
+  
+  h2 {
+    margin: 20px 0 0 0;
+  }
+
+h1 {
+    text-align: center;
+  }
+  
+  h2 {
+    text-align: left;
+  }
+  
+  h3 {
+    text-align: right;
+  }
+
+
+  p {
+    text-indent: 50px;
+  }
+
+  h1 {
+    letter-spacing: 5px;
+  }
+  
+  h2 {
+    letter-spacing: -2px;
+  }

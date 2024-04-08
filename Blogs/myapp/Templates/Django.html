@@ -1,0 +1,293 @@
+<html>
+    <head>
+        <title>title</title>
+    </head>
+    <body background="static/image.png">
+       <b> <p>Welcome to our django page</p></b>
+       <p><b><pre>
+        Getting started with Django
+Read
+Courses
+Practice
+Jobs
+Python Django is a web framework that is used to create web applications very efficiently and quickly. Django is called a battery included framework because it contains a lot of in-built features such as Django Admin Interface, default database – SQLite3, etc. Django provides various ready-made components such as a way to handle user authentication, a management panel for your website, forms, a way to upload files, etc.
+
+In this article, we will learn Django by creating a basic blogging web application.  
+
+Why Django Framework?
+Django is a rapid web development framework that can be used to develop fully fleshed web applications in a short period of time.
+It’s very easy to switch databases in the Django framework.
+It has a built-in admin interface which makes it easy to work with it.
+Django is a fully functional framework that requires nothing else.
+It has thousands of additional packages available.
+It is very scalable.
+Structure of Django Web Application
+Django is based on MVT (Model-View-Template) architecture. MVT is a software design pattern for developing a web application. 
+
+Model: The model is going to act as the interface of your data. It is responsible for maintaining data. It is the logical data structure behind the entire application and is represented by a database (generally relational databases such as MySql, Postgres).
+View: The View is the user interface — what you see in your browser when you render a website. It is represented by HTML/CSS/Javascript and Jinja files.
+Template: A template consists of static parts of the desired HTML output as well as some special syntax describing how dynamic content will be inserted.
+Django Architecture
+
+
+Setting the Development Environment
+It is always advisable to use a virtual environment before starting any Django project because sometimes when you are working on multiple projects you might need different versions of Django. The virtual environment creates a separate environment for different projects and you can install dependencies of each project separately. To create a virtual environment type the below command in the terminal – 
+
+python3 -m venv <name>
+Here the name is the name of the virtual environment. We can give any name to our environment. Let’s create the virtual environment with the name as venv only. So the command to create the environment will be – 
+
+python3 -m venv venv
+After running the above command you will see a folder named venv with the following sub-directories.
+
+python django create virtual environment
+
+After creating the virtual environment let’s activate it. To activate it type the below command in the terminal.
+
+source ./venv/bin/activate
+Note: If you have your virtual environment set up in another location and your terminal opened up in another location, then provide the location to the venv folder i.e. our virtual environment folder.
+
+After you run the above command you should see (venv) at the starting of every line of your terminal as shown in the below image.
+
+python django virtual environment activate
+
+Installing Django
+We can install Django using the pip command. To install this type the below command in the terminal.
+
+
+pip install django
+python django install
+
+For more information, refer to Django Introduction and Installation
+
+Starting the Project
+To initiate a project of Django on Your PC, open Terminal and Enter the following command
+django-admin startproject projectName
+A New Folder with the name projectName will be created. To enter in the project using the terminal enter command
+cd projectName
+Now let’s run the server and see everything is working fine or not. To run the server type the below command in the terminal.
+python manage.py runserver
+After running the server go to http://127.0.0.1:8000/ and you’ll see something like this –
+
+Django runserver
+
+Project Structure
+A Django Project when initialized contains basic files by default such as manage.py, view.py, etc. A simple project structure is enough to create a single-page application. Here are the major files and their explanations. Inside the geeks_site folder ( project folder ) there will be the following files- 
+
+Django project structure
+
+Let’s discuss these files in detail – 
+
+manage.py: This file is used to interact with your project via the command line(start the server, sync the database… etc). For getting the full list of commands that can be executed by manage.py type this code in the command window- 
+
+python manage.py help
+_init_.py: It is a python package. It is invoked when the package or a module in the package is imported. We usually use this to execute package initialization code, for example for the initialization of package-level data.
+settings.py: As the name indicates it contains all the website settings. In this file, we register any applications we create, the location of our static files, database configuration details, etc.
+urls.py: In this file, we store all links of the project and functions to call.
+wsgi.py: This file is used in deploying the project in WSGI. It is used to help your Django application communicate with the webserver.
+Creating App
+Till now we have created the Django project and now we will create an app. Django is famous for its unique and fully managed app structure. For every functionality, an app can be created like a completely independent module. To create an app we need to go to the directory containing manage.py and run the following command – 
+
+python manage.py startapp appname
+Now let’s create an app called post, so the command to create the app would be – 
+
+python manage.py startapp post
+Now our directory looks like this –  
+
+Creating app python django
+
+To consider the project i our project we need to specify the project name in the INSTALLED_APPS list in settings.py –
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'post.apps.PostConfig', # our app name
+]
+ 
+ 
+
+Defining Models
+
+ 
+
+Now for the post app, we need some models.  A Django model is the built-in feature that Django uses to create tables, their fields, and various constraints. In short, Django Models is the SQL of Database one uses with Django. SQL (Structured Query Language) is complex and involves a lot of different queries for creating, deleting, updating, or any other stuff related to the database. Django models simplify the tasks and organize tables into models. Generally, each model maps to a single database table.
+
+
+ 
+
+Syntax:
+
+
+ 
+
+from django.db import models       
+class ModelName(models.Model):
+       field_name = models.Field(**options)
+
+ 
+
+
+Example:
+
+
+ 
+
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+ 
+class Post(models.Model):
+ 
+    title = models.CharField(max_length=255)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+    created_on = models.DateTimeField(default=timezone.now)
+    last_modified = models.DateTimeField(auto_now=True)
+ 
+    def __str__(self) -> str:
+        return self.title
+ 
+ 
+
+In the above model, each field represents a column in the SQLite database. We have also created a foreign key for the User model. The user model comes built-in with Django. 
+
+
+ 
+
+Note: The on_delete=models.CASCADE command will delete all the posts of an author if the profile for that author is deleted. 
+
+
+ 
+
+Whenever we create a Model, Delete a Model, or update anything in any of models.py of our project. We need to run two commands makemigrations and migrate. makemigrations basically generates the SQL commands for preinstalled apps (which can be viewed in installed apps in settings.py) and your newly created app’s model which you add in installed apps whereas migrate executes those SQL commands in the database file.
+
+
+ 
+
+So when we run,
+
+
+ 
+
+python manage.py makemigrations
+
+ 
+
+SQL Query to create the above Model as a Table is created. We can see this under the migrations folder as 0001_initial.py.
+
+
+ 
+
+python makemigrations
+
+
+ 
+
+To create the table in the database type
+
+
+ 
+
+python manage.py migrate
+
+ 
+
+Now we have created a model we can perform various operations such as creating a Row for the table or in terms of Django Creating an instance of Model. To know more visit – Django Basic App Model – Makemigrations and Migrate.
+
+
+ 
+
+Render Model in Django Admin
+
+ 
+
+After creating the model we need to add data from to our model. We can add data in two ways. These are – 
+
+
+ 
+
+Django Shell
+Django Admin
+
+ 
+
+In this article, we will focus on rendering model data through Admin Interface. If you want to learn about rendering data through Django Shell refer to Django ORM – Inserting, Updating & Deleting Data.
+
+
+ 
+
+We need to create a superuser for our web application that will access the admin panel. To create a superuser type the below command in the terminal – 
+
+
+ 
+
+python manage.py createsuperuser
+django admin createsuperuser
+
+
+ 
+
+Now go to http://127.0.0.1:8000/admin on the browser to access the admin interface panel. 
+
+
+ 
+
+django admin interface login
+
+
+ 
+
+Give the username and password created for the superuser and then the admin dashboard will open.
+
+
+ 
+
+django admin interface
+
+
+ 
+
+To render our model onto our admin panel we need to make changes to the post/admin.py file. Enter the following code to the admin.py file –
+
+
+ 
+
+from django.contrib import admin
+from .models import Post
+ 
+# Register your models here.
+admin.site.register(Post)
+Refreshing your admin panel will let you see the model that we created.
+
+django admin dashboard
+
+Note: For more information refer to Render Model in Django Admin Interface.
+
+Let’s add some data to our database. Clicking on the Geeks Model we will see something like this – 
+
+Django admin interface model
+
+We can click on the Add Post button on the right top corner and then we will be able to see the fields for adding data. See the below image – 
+
+Django add data using admin
+
+After adding the required data we will see something like this on our admin dashboard – 
+
+django admin models dashboard
+
+Django Views
+After creating and adding data to our models, we need to display the data to our site. Rendering data is a two-step process. First we need to create our view function and then we need to pass the data to our template. Here we will focus on the view function.
+
+A view function is a Python function that takes a Web request and returns a Web response. This response can be the HTML contents of a Web page, or a redirect, or a 404 error, or an XML document, or an image, anything that a web browser can display. Django views are part of the user interface — they usually render the HTML/CSS/Javascript in your Template files into what you see in your browser when you render a web page.
+
+django-views
+
+At first, let’s create a sample view function that will simply show normal HTML content.
+
+
+</pre> </b> </p>
+    </body>
+    </html>
